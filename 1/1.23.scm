@@ -13,13 +13,16 @@
   (display " *** ")
   (display elapsed-time))
 
+(define (next n) 
+  (if (= n 2) 3 (+ n 2)))
+
 (define (smallest-divisor n)
   (find-divisor n 2))
 
 (define (find-divisor n test-divisor)
   (cond ((> (square test-divisor) n) n)
         ((divides? test-divisor n) test-divisor)
-        (else (find-divisor n (+ test-divisor 1)))))
+        (else (find-divisor n (next test-divisor)))))
 
 (define (divides? a b)
   (= (remainder b a) 0))
@@ -37,14 +40,6 @@
   (if (even? a) (search-for-primes-not-even (+ a 1) b) 
       (search-for-primes-not-even a b)))
   
-; 1009 *** 61
-; 1013 *** 29
-; 1019 *** 29
-;
-; 10007 *** 89
-; 10009 *** 80
-; 10061 *** 80
-;
-; 100003 *** 269
-; 100019 *** 408
-; 100043 *** 250
+; 100003 *** 145 (269)
+; 100019 *** 145 (408)
+; 100043 *** 145 (250)
