@@ -35,10 +35,10 @@
                 (make-interval (min (* (lower-bound x) (upper-bound y))
                                     (* (upper-bound x) (lower-bound y)))
                                (max (* (lower-bound x) (lower-bound y))
-                                    (* (upper-bound x) (upper-bound y)))))))
-         
-        (else (make-interval 0 0))))
-
+                                    (* (upper-bound x) (upper-bound y)))))
+               (else (make-interval (* (lower-bound x) (upper-bound y))
+                                    (* (upper-bound x) (upper-bound y))))))
+         (else (mul-interval-case y x)))) ; I'm to lazy to continue %)
 
 (define n1 (make-interval -3 -1))
 (define n2 (make-interval -6 -2))
