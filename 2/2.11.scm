@@ -32,7 +32,14 @@
                   (make-interval (min (* lx uy) (* ux ly))
                                  (max (* lx ly) (* ux uy))))
                  (else (make-interval (* lx uy) (* ux uy)))))
-          (else (mul-interval-case y x))))) ; I'm to lazy to continue %)
+          (else
+           (cond ((< uy 0)
+                  (make-interval (* ux ly) (* lx uy)))
+                 ((< ly 0)
+                  (make-interval (* ux ly) (* ux uy)))
+                 (else
+                  (make-interval (* lx ly) (* ux uy))))))))
+                  
 
 (define n1 (make-interval -3 -1))
 (define n2 (make-interval -6 -2))
