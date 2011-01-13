@@ -14,12 +14,14 @@
 
 (define (right-branch mobile)
   (cadr mobile))
+; cdr for cons
 
 (define (branch-length branch)
   (car branch))
 
 (define (branch-structure branch)
   (cadr branch))
+; cdr for cons
 
 (define (branch-weight branch)
   (let ((structure (branch-structure branch)))
