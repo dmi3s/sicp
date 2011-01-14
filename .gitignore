@@ -1,2 +1,4 @@
 # Ignore emacs backups files
 *~
+# Ignore compiled files
+compiled
