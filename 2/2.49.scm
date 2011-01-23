@@ -1,6 +1,5 @@
 #lang scheme
 (require (planet "sicp.ss" ("soegaard" "sicp.plt" 2 1)))
-(require "mods/accumulate.scm")
 
 (define ms make-segment)
 (define mv make-vect)
