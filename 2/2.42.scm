@@ -9,8 +9,7 @@
   (define (queen-cols k)
     (if (= k 0)
         (list empty-board)
-        (filter
-         (lambda (positions) (safe? k positions))
+        (filter safe?
          (flatmap
           (lambda (rest-of-queens)
             (map (lambda (new-row)
@@ -34,18 +33,16 @@
         (r2 (pos-row pos2))
         (c1 (pos-col pos1))
         (c2 (pos-col pos2)))
-    (or (eq? pos1 pos2)
-        (not (or (= r1 r2) (= c1 c2)
-                 (= (abs (- r1 r2)) (abs (- c1 c2))))))))
+    (not (or (= r1 r2) (= c1 c2)
+             (= (abs (- r1 r2)) (abs (- c1 c2)))))))
   
-(define (safe? col positions)
+(define (safe? positions)
   (define (safe-position? pos rest)
     (cond ((empty? rest) true)
           (else (if (safe-pos? pos (car rest))
                     (safe-position? pos (cdr rest))
                     false))))
-  (define interest (car (filter (lambda (p) (= (pos-col p) col)) positions)))
-  (safe-position? interest positions))
+  (safe-position? (car positions) (cdr positions)))
   
   
 (define (test size)
