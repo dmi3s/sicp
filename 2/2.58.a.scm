@@ -1,6 +1,5 @@
-#lang scheme
-(require (planet "sicp.ss" ("soegaard" "sicp.plt" 2 1)))
-
+;#lang scheme
+;(require (planet "sicp.ss" ("soegaard" "sicp.plt" 2 1)))
 ; Numbers
 (define (=number? exp num)
   (and (number? exp) (= exp num)))
@@ -78,4 +77,3 @@
           (deriv (base exp) var)))
         (else
          (error "unknow expression -- DERIV" exp))))
-
