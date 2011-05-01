@@ -11,6 +11,16 @@
 (define (same-variable? v1 v2)
   (and (variable? v1) (variable? v2) (eq? v1 v2)))
 
+; Helpers
+(define (split-by x e)
+  (define (split-int l r)
+    (cond ((null? r) null)
+          ((eq? (car r) x)
+           (list l (cdr r)))
+          (else (split-int (append l (list (car r)))
+                           (cdr r)))))
+  (split-int '() e))
+
 ; Sums
 (define (make-sum a1 a2)
   (cond ((=number? a1 0) a2)
@@ -40,22 +50,6 @@
 
 (define (multiplicand p) (caddr p))
 
-; Exps
-(define (make-exponentiation u n)
-  (cond ((=number? n 0) 1)
-        ((=number? n 1) u)
-        ((number? u) (power u n))
-        (else (list '** u n))))
-
-(define (exponentiation? e)
-  (and (pair? e) (eq? (car e) '**)))
-
-(define (base e) (cadr e))
-
-(define (exponent e) (caddr e))
-
-(define (power a b) (exp (* b (log a))))
-
 ; Derivative
 (define (deriv exp var)
   (cond ((number? exp) 0)
@@ -70,11 +64,5 @@
                         (deriv (multiplicand exp) var))
           (make-product (deriv (multiplier exp) var)
                         (multiplicand exp))))
-        ((exponentiation? exp)
-         (make-product 
-          (make-product (exponent exp)
-                        (make-exponentiation (base exp)
-                                             (- (exponent exp) 1)))
-          (deriv (base exp) var)))
         (else
          (error "unknow expression -- DERIV" exp))))
