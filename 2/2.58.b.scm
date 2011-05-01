@@ -12,6 +12,11 @@
   (and (variable? v1) (variable? v2) (eq? v1 v2)))
 
 ; Helpers
+(define (omit-parenthesis e)
+  (if (null? (cdr e))
+      (car e)
+      e))
+
 (define (split-by x e)
   (define (split-int l r)
     (cond ((null? r) null)
@@ -29,11 +34,12 @@
         (else (list a1 '+ a2))))
 
 (define (sum? x)
-  (and (pair? x) (eq? (cadr x) '+)))
+  (and (pair? x) 
+       (not (null? (split-by '+ x)))))
 
-(define (addend s) (car s))
+(define (addend s) (omit-parenthesis (car (split-by '+ s))))
 
-(define (augend s) (caddr s))
+(define (augend s) (omit-parenthesis (cadr (split-by '+ s))))
 
 ; Products
 (define (make-product m1 m2)
@@ -44,11 +50,13 @@
         (else (list m1 '* m2))))
 
 (define (product? x)
-  (and (pair? x) (eq? (cadr x) '*)))
+  (and (pair? x) 
+       (not (sum? x))
+       (not (null? (split-by '* x)))))
 
-(define (multiplier p) (car p))
+(define (multiplier p) (omit-parenthesis (car (split-by '* p))))
 
-(define (multiplicand p) (caddr p))
+(define (multiplicand p) (omit-parenthesis (cadr (split-by '* p))))
 
 ; Derivative
 (define (deriv exp var)
