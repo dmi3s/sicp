@@ -69,7 +69,7 @@
   (define (encode t)
     (cond ((null? t) (error "Can't find branch for" s))
           ((leaf? t) (if (contains? s (symbols t)) '() (error "Can't find branch for " s)))
-          ((contains? s (left-branch t)) (cons '0 (encode (left-branch t))))
+          ((contains? s (symbols (left-branch t))) (cons '0 (encode (left-branch t))))
           (else (cons '1 (encode (right-branch t))))))
   (encode tree))
 

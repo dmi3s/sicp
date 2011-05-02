@@ -48,12 +48,12 @@
         ((= bit 1) (right-branch branch))
         (else (error "плохой бит -- CHOOSE-BRANCH" bit))))
 
-(define sample-tree
-  (make-code-tree (make-leaf 'A 4)
-                  (make-code-tree
-                   (make-leaf 'B 2)
-                   (make-code-tree (make-leaf 'D 1)
-                                    (make-leaf 'C 1)))))
+;(define sample-tree
+;  (make-code-tree (make-leaf 'A 4)
+;                  (make-code-tree
+;                   (make-leaf 'B 2)
+;                   (make-code-tree (make-leaf 'D 1)
+;                                    (make-leaf 'C 1)))))
 
 
 (define (encode message tree)
@@ -73,6 +73,37 @@
           (else (cons '1 (encode (right-branch t))))))
   (encode tree))
 
-(define sample-message '(0 1 1 0 0 1 0 1 0 1 1 1 0))
+;(define sample-message '(0 1 1 0 0 1 0 1 0 1 1 1 0))
 
-(define test (encode '(A D A B B C A) sample-tree))
+;(define test (encode '(A D A B B C A) sample-tree))
+
+(define (adjoin-set x set)
+  (cond ((null? set) (list x))
+        ((< (weight x) (weight (car set))) (cons x set))
+        (else (cons (car set)
+                    (adjoin-set x (cdr set))))))
+
+(define (make-leaf-set pairs)
+  (if (null? pairs)
+      '()
+      (let ((pair (car pairs)))
+        (adjoin-set (make-leaf (car pair)
+                               (cadr pair))
+                    (make-leaf-set (cdr pairs))))))
+
+(define (generate-huffman-tree pairs)
+  (successive-merge (make-leaf-set pairs)))
+
+(define (successive-merge leaves)
+  (define (merge l)
+    (if (null? (cdr l)) (car l)
+        (let ((first (car l))
+              (second (cadr l))
+              (tail (cddr l)))
+          (merge (adjoin-set (make-code-tree first second) tail)))))
+  (merge leaves))
+
+(define rock-tree (generate-huffman-tree
+                   '((BOOM 1) (A 2) (GET 2) (JOB 2) (NA 16) (SHA 3) (YIP 9) (WAH 1))))
+
+(define rock-song '(GET A JOB SHA NA NA NA NA NA NA NA NA GET A JOB SHA NA NA NA NA NA NA NA NA WAH YIP YIP YIP YIP YIP YIP YIP YIP YIP SHA BOOM))
