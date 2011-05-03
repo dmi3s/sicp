@@ -4,7 +4,6 @@
          "math-complex.scm"
          "math-complex-rectangular.scm"
          "math-complex-polar.scm"
-         "math-coercion.scm"
          )
 
 (provide install-math)
@@ -15,5 +14,4 @@
   (install-complex-package)
   (install-rectangular-package)
   (install-polar-package)
-  (install-math-coercion)
   'done-install-math)

@@ -43,5 +43,13 @@
                           (* (denom x) (numer y)))))
   (put '=zero? '(rational)
        (lambda (r) (eq? (numer r) 0)))
+
+  ;; Type conversions
+  (define (rational->scheme-number r)
+    (make-scheme-number (/ (numer r) (denom r))))
+  (put-coercion 'rational 'scheme-number
+                rational->scheme-number)
+    
+  
   'done-rational)
 
