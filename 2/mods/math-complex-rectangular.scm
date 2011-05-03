@@ -1,7 +1,7 @@
 #lang scheme
 (require "get-put.scm" "tag.scm" "math.scm")
 
-(provide install-rectangular-package make-from-real-imag)
+(provide install-rectangular-package)
 
 (define (install-rectangular-package)
   (define (square x) (* x x))
@@ -28,5 +28,3 @@
        (lambda (r a) (tag (make-from-mag-ang r a))))
   'done-rectangular)
 
-(define (make-from-real-imag x y)
-  ((get 'make-from-real-imag 'rectangular) x y))
