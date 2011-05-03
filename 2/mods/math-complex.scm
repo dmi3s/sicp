@@ -26,6 +26,9 @@
   (define (equ? z1 z2)
     (and (eq? (real-part z1) (real-part z2))
          (eq? (imag-part z1) (imag-part z2))))
+  (define (=zero? z) 
+    (and (eq? (real-part z) 0)
+         (eq? (imag-part z) 0)))
    ;; интерфейс к остальной системе
   (define (tag z) (attach-tag 'complex z))
   (put 'add '(complex complex)
@@ -47,6 +50,8 @@
   (put 'angle '(complex) angle)
   ; Ex. 2.79
   (put 'equ? '(complex complex) equ?)
+  ; Ex. 2.80
+  (put '=zero? '(complex) =zero?)
   'done-complex)
 
 

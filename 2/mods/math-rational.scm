@@ -41,5 +41,7 @@
   (put 'equ? '(rational rational)
        (lambda (x y) (eq? (* (numer x) (denom y))
                           (* (denom x) (numer y)))))
+  (put '=zero? '(rational)
+       (lambda (r) (eq? (numer r) 0)))
   'done-rational)
 
