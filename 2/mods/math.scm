@@ -8,7 +8,10 @@
          add sub mul div
          real-part imag-part magnitude angle
          equ? =zero?
+         expm
          )
+
+(define (expm x y) (apply-generic 'expm x y)) ; Temporary for 2.81
 
 (define (equ? x y) (apply-generic 'equ? x y))
 (define (=zero? z) (apply-generic '=zero? z))
