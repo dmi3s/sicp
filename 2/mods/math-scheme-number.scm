@@ -20,11 +20,5 @@
        (lambda (x y) (eq? x y)))
   (put '=zero? '(scheme-number)
        (lambda (x) (eq? x 0)))
-  ;;; Temporary for 2.81
-  ;; Следующие строки добавляются в пакет scheme-number
-  (put 'expm '(scheme-number scheme-number)
-       (lambda (x y) (tag (expt x y)))) ;используется
-  ;элементарная expt
-
   'done-scheme-number)
 
