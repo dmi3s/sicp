@@ -1,7 +1,8 @@
 #lang scheme
 (require r5rs)
 
-(provide get put)
+(provide get put
+         get-coercion put-coercion)
 
 (define (make-table)
   (let ((local-table (list '*table*)))
@@ -37,4 +38,8 @@
 
 (define get (operation-table 'lookup-proc))
 (define put (operation-table 'insert-proc!))
+
+(define coercion-table (make-table))
+(define get-coercion (coercion-table 'lookup-proc))
+(define put-coercion (coercion-table 'insert-proc!))
 
