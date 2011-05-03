@@ -1,6 +1,6 @@
 #lang scheme
 (require "get-put.scm" 
-         "tag.scm"
+         "apply-generic.scm"
          )
 
 (provide make-scheme-number make-rational
@@ -8,17 +8,7 @@
          add sub mul div
          real-part imag-part magnitude angle
          equ? =zero?
-         apply-generic ; Just for tests
          )
-
-(define (apply-generic op . args)
-  (let ((type-tags (map type-tag args)))
-    (let ((proc (get op type-tags)))
-      (if proc
-          (apply proc (map contents args))
-          (error
-           "Нет метода для этих типов -- APPLY-GENERIC"
-           (list op type-tags))))))
 
 (define (equ? x y) (apply-generic 'equ? x y))
 (define (=zero? z) (apply-generic '=zero? z))
