@@ -1,9 +1,7 @@
 #lang scheme
-(require "get-put.scm" "tag.scm")
+(require "get-put.scm" "tag.scm" "math.scm")
 
-(provide install-complex-package 
-         make-complex-from-real-imag
-         make-complex-from-real-imag)
+(provide install-complex-package)
 
 (define (install-complex-package)
    ;; процедуры, импортируемые из декартова
@@ -39,10 +37,11 @@
        (lambda (x y) (tag (make-from-real-imag x y))))
   (put 'make-from-mag-ang 'complex
        (lambda (r a) (tag (make-from-mag-ang r a))))
-  'done)
+  ; Ex. 2.77
+  (put 'real-part '(complex) real-part)
+  (put 'imag-part '(complex) imag-part)
+  (put 'magnitude '(complex) magnitude)
+  (put 'angle '(complex) angle)
+  'done-complex)
 
-(define (make-complex-from-real-imag x y)
-  ((get 'make-from-real-imag 'complex) x y))
 
-(define (make-complex-from-mag-ang r a)
-  ((get 'make-from-mag-ang 'complex) r a))

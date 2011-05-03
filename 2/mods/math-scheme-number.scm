@@ -1,7 +1,7 @@
 #lang scheme
-(require "get-put.scm" "tag.scm")
+(require "get-put.scm" "tag.scm" "math.scm")
 
-(provide install-scheme-number-package make-scheme-number)
+(provide install-scheme-number-package)
 
 (define (install-scheme-number-package)
   (define (tag x)
@@ -18,5 +18,3 @@
        (lambda (x) (tag x)))
   'done-scheme-number)
 
-(define (make-scheme-number n)
-  ((get 'make 'scheme-number) n))

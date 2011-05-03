@@ -1,14 +1,10 @@
 #lang scheme
 (require "get-put.scm" 
          "tag.scm"
-         "math-scheme-number.scm"
-         "math-rational.scm"
-         "math-complex.scm"
-         "math-complex-rectangular.scm"
-         "math-complex-polar.scm"
          )
 
-(provide install-math
+(provide make-scheme-number make-rational
+         make-complex-from-real-imag make-complex-from-mag-ang
          add sub mul div
          real-part imag-part magnitude angle
          apply-generic ; Just for tests
@@ -34,12 +30,15 @@
 (define (magnitude z) (apply-generic 'magnitude z))
 (define (angle z) (apply-generic 'angle z))
 
+(define (make-scheme-number n)
+  ((get 'make 'scheme-number) n))
 
+(define (make-rational n d)
+  ((get 'make 'rational) n d))
 
-(define (install-math)
-  (install-scheme-number-package)
-  (install-rational-package)
-  (install-complex-package)
-  (install-rectangular-package)
-  (install-polar-package)
-  'done-install-math)
+(define (make-complex-from-real-imag x y)
+  ((get 'make-from-real-imag 'complex) x y))
+
+(define (make-complex-from-mag-ang r a)
+  ((get 'make-from-mag-ang 'complex) r a))
+

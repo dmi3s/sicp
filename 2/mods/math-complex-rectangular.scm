@@ -1,5 +1,5 @@
 #lang scheme
-(require "get-put.scm" "tag.scm")
+(require "get-put.scm" "tag.scm" "math.scm")
 
 (provide install-rectangular-package make-from-real-imag)
 

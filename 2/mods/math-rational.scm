@@ -1,7 +1,7 @@
 #lang scheme
-(require "get-put.scm" "tag.scm")
+(require "get-put.scm" "tag.scm" "math.scm")
 
-(provide install-rational-package make-rational)
+(provide install-rational-package)
 
 (define (install-rational-package)
    ;; внутренние процедуры
@@ -40,5 +40,3 @@
        (lambda (n d) (tag (make-rat n d))))
   'done-rational)
 
-(define (make-rational n d)
-  ((get 'make 'rational) n d))
