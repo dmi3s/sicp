@@ -94,9 +94,8 @@
                    (make-exponentiation (base args)
                                         (- (exponent args) 1)))
      (deriv (base args) var)))
-    
-    (put 'deriv '+ deriv-sum)
-    (put 'deriv '* deriv-product)
-    (put 'deriv '** deriv-exp)
-    'done)
   
+  (put 'deriv '+ deriv-sum)
+  (put 'deriv '* deriv-product)
+  (put 'deriv '** deriv-exp)
+  'done)
