@@ -2,7 +2,8 @@
 (require r5rs)
 
 (provide get put
-         get-coercion put-coercion)
+         get-coercion put-coercion
+         print-coercion-table print-operation-table)
 
 (define (make-table)
   (let ((local-table (list '*table*)))
@@ -31,6 +32,7 @@
     (define (dispatch m)
       (cond ((eq? m 'lookup-proc) lookup)
             ((eq? m 'insert-proc!) insert!)
+            ((eq? m 'debug-print) (print local-table))
             (else (error "Unknown operation -- TABLE" m))))
     dispatch))
 
@@ -38,8 +40,12 @@
 
 (define get (operation-table 'lookup-proc))
 (define put (operation-table 'insert-proc!))
+(define (print-operation-table)
+  (operation-table 'debug-print))
 
 (define coercion-table (make-table))
 (define get-coercion (coercion-table 'lookup-proc))
 (define put-coercion (coercion-table 'insert-proc!))
+(define (print-coercion-table)
+  (coercion-table 'debug-print))
 
