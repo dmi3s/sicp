@@ -7,6 +7,7 @@
          make-complex-from-real-imag make-complex-from-mag-ang
          add sub mul div
          real-part imag-part magnitude angle
+         equ?
          apply-generic ; Just for tests
          )
 
@@ -19,7 +20,7 @@
            "Нет метода для этих типов -- APPLY-GENERIC"
            (list op type-tags))))))
 
-
+(define (equ? x y) (apply-generic 'equ? x y))
 (define (add x y) (apply-generic 'add x y))
 (define (sub x y) (apply-generic 'sub x y))
 (define (mul x y) (apply-generic 'mul x y))

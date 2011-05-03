@@ -23,6 +23,9 @@
   (define (div-complex z1 z2)
     (make-from-mag-ang (/ (magnitude z1) (magnitude z2))
                        (- (angle z1) (angle z2))))
+  (define (equ? z1 z2)
+    (and (eq? (real-part z1) (real-part z2))
+         (eq? (imag-part z1) (imag-part z2))))
    ;; интерфейс к остальной системе
   (define (tag z) (attach-tag 'complex z))
   (put 'add '(complex complex)
@@ -42,6 +45,8 @@
   (put 'imag-part '(complex) imag-part)
   (put 'magnitude '(complex) magnitude)
   (put 'angle '(complex) angle)
+  ; Ex. 2.79
+  (put 'equ? '(complex complex) equ?)
   'done-complex)
 
 

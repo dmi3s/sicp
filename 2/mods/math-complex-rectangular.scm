@@ -16,6 +16,9 @@
     (atan (imag-part z) (real-part z)))
   (define (make-from-mag-ang r a)
     (cons (* r (cos a)) (* r (sin a))))
+  (define (equ? x y)
+    (and (eq? (real-part x) (real-part y))
+         (eq? (imag-part x) (imag-part y))))
    ;; интерфейс к остальной системе
   (define (tag x) (attach-tag 'rectangular x))
   (put 'real-part '(rectangular) real-part)
