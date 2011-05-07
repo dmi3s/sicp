@@ -50,7 +50,10 @@
       (make-scheme-number (/ (numer r) (denom r)))))
   (put-coercion 'rational 'scheme-number
                 rational->scheme-number)
-    
+  
+  (define (raise r)
+      (make-scheme-number (/ (numer r) (denom r))))
+  (put 'raise '(rational) raise)
   
   'done-rational)
 

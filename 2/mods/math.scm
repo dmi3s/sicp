@@ -7,8 +7,12 @@
          make-complex-from-real-imag make-complex-from-mag-ang
          add sub mul div
          real-part imag-part magnitude angle
+         raise
          equ? =zero?
          )
+
+; rational->numeric->complex
+(define (raise x) (apply-generic 'raise x))
 
 (define (equ? x y) (apply-generic 'equ? x y))
 (define (=zero? z) (apply-generic '=zero? z))

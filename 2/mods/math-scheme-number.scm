@@ -23,8 +23,12 @@
   ;; Type conversions
   (define (scheme-number->complex n-tagged)
     (let ((n (contents n-tagged)))
-      (make-complex-from-real-imag (contents n) 0)))
+      (make-complex-from-real-imag n 0)))
   (put-coercion 'scheme-number 'complex scheme-number->complex)
+  
+  (define (raise n)
+    (make-complex-from-real-imag n 0))
+  (put 'raise '(scheme-number) raise)
   
   'done-scheme-number)
 
