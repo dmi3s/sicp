@@ -45,8 +45,9 @@
        (lambda (r) (eq? (numer r) 0)))
 
   ;; Type conversions
-  (define (rational->scheme-number r)
-    (make-scheme-number (/ (numer r) (denom r))))
+  (define (rational->scheme-number r-tagged)
+    (let ((r (contents r-tagged)))
+      (make-scheme-number (/ (numer r) (denom r)))))
   (put-coercion 'rational 'scheme-number
                 rational->scheme-number)
     

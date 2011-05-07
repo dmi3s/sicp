@@ -21,8 +21,9 @@
   (put '=zero? '(scheme-number)
        (lambda (x) (eq? x 0)))
   ;; Type conversions
-  (define (scheme-number->complex n)
-    (make-complex-from-real-imag (contents n) 0))
+  (define (scheme-number->complex n-tagged)
+    (let ((n (contents n-tagged)))
+      (make-complex-from-real-imag (contents n) 0)))
   (put-coercion 'scheme-number 'complex scheme-number->complex)
   
   'done-scheme-number)
