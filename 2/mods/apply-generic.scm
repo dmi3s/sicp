@@ -44,11 +44,11 @@
   ; return (cons ok op-result)
   (let ((type-tags (map type-tag args)))
     (let ((type-set (make-set type-tags)))
-      (display "APPLY WITH COERCION: ") (display type-tags) (display type-set)
+;      (display "APPLY WITH COERCION: ") (display type-tags) (display type-set)
       (try-apply op args type-set))))
 
 (define (apply-generic op . args)
-  (display "APPLAY-GENERIC: ") (display (list op args)) (display "\n")
+;  (display "APPLAY-GENERIC: ") (display (list op args)) (display "\n")
   (let ((r (try-apply-args op args)))
     (if (car r) (cdr r)
         (let ((cr (apply-with-coercion op args)))
